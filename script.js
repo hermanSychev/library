@@ -35,26 +35,39 @@ function displayBooks() {
 		const item = document.createElement("div");
 		item.setAttribute("id", crypto.randomUUID());
 		const removeBtn = document.createElement("button");
+		const switchBtn = document.createElement("button");
 		item.classList.add("book");
 
 		card1.textContent = book.title;
 		card2.textContent = book.author;
 		card3.textContent = `${book.pages} pages`;
 		card4.textContent = book.info();
-
+		switchBtn.textContent = "toggle";
 		removeBtn.textContent = "remove";
+
+		switchBtn.addEventListener("click", ()=>{
+			book.toggleRead()
+			card4.textContent = book.info();
+		});
+
 		removeBtn.addEventListener("click", () => {
-			item.remove()
+			item.remove();
 		});
 
 		item.appendChild(card1);
 		item.appendChild(card2);
 		item.appendChild(card3);
 		item.appendChild(card4);
+		item.appendChild(switchBtn);
 		item.appendChild(removeBtn);
+
 		holder.appendChild(item);
 	}
 }
+
+Book.prototype.toggleRead = function () {
+	this.read = !this.read;
+};
 
 const dialogButton = document.querySelector("#dialog-button");
 const dialog = document.querySelector("#dialog");
