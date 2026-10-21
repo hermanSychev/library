@@ -6,8 +6,33 @@ body {
 	color: rgb(67, 63, 63);
 }
 
-h1{
-    text-align: center;
+h1 {
+	text-align: center;
+}
+
+dialog {
+	width: 80vw;
+	border: none;
+	border-radius: 10px;
+	&::backdrop {
+		background: hsl(0 0 0 / 0.5);
+		backdrop-filter: blur(5px);
+	}
+}
+
+dialog fieldset{
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 5px;
+	border: none;
+}
+
+dialog h2{
+	text-align: center;
+}
+
+input[type="submit"]{
+	display: block;
 }
 
 #library {

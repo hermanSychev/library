@@ -1,15 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="script.js" defer></script>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <h1>Library</h1>
-    <div id="library">
-    </div>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="script.js" defer></script>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<h1>Library</h1>
+
+		<button id="dialog-button">Add Book</button>
+		<dialog id="dialog">
+			<form id="book-form">
+				<fieldset>
+					<h2>Add Another Book</h2>
+					<label for="title">
+						Title of the book
+						<input type="text" id="title" name="title" required placeholder="Blood Meridian"/>
+					</label>
+					<label for="author">
+						Author
+						<input id="author" name="author" type="text" required placeholder="Cormac McCarthy"/>
+					</label>
+					<label for="pages">
+						Number of pages
+						<input
+							name="pages"
+							id="pages"
+							type="text"
+							inputmode="numeric"
+							pattern="\d*"
+							oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+							placeholder="Enter numbers only"
+						/>
+					</label>
+					<label for="read"> Did you read it?
+						<input name="read" id="read" type="checkbox" />
+                        <input type="submit" id="submit" value="Add">
+					</label>
+				</fieldset>
+			</form>
+		</dialog>
+		<div id="library"></div>
+	</body>
 </html>

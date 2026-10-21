@@ -23,12 +23,9 @@ function addBookToLibrary(title, author, pages, read) {
 	myLibrary.push(book);
 }
 
-addBookToLibrary("The Master and Margarita", "Mikhail Bulgakov", 384, true);
-addBookToLibrary("The Master and Margarita", "Mikhail Bulgakov", 384, false);
-console.log(myLibrary);
-
 function displayBooks() {
 	const holder = document.querySelector("#library");
+	holder.innerHTML = "";
 
 	for (const book of myLibrary) {
 		const card1 = document.createElement("p");
@@ -36,19 +33,52 @@ function displayBooks() {
 		const card3 = document.createElement("p");
 		const card4 = document.createElement("p");
 		const item = document.createElement("div");
-        item.classList.add("book")
+		item.setAttribute("id", crypto.randomUUID());
+		const removeBtn = document.createElement("button");
+		item.classList.add("book");
 
 		card1.textContent = book.title;
 		card2.textContent = book.author;
 		card3.textContent = `${book.pages} pages`;
 		card4.textContent = book.info();
 
+		removeBtn.textContent = "remove";
+		removeBtn.addEventListener("click", () => {
+			item.remove()
+		});
+
 		item.appendChild(card1);
 		item.appendChild(card2);
 		item.appendChild(card3);
 		item.appendChild(card4);
+		item.appendChild(removeBtn);
 		holder.appendChild(item);
 	}
 }
 
-displayBooks();
+const dialogButton = document.querySelector("#dialog-button");
+const dialog = document.querySelector("#dialog");
+
+dialogButton.addEventListener("click", () => {
+	dialog.showModal();
+});
+
+const bookForm = document.querySelector("#book-form");
+const addButton = document.querySelector("#submit");
+
+bookForm.addEventListener("submit", function (event) {
+	event.preventDefault();
+	const title = document.querySelector("#title");
+	const author = document.querySelector("#author");
+	const pages = document.querySelector("#pages");
+	const read = document.querySelector("#read");
+
+	let label = title.value;
+	let creator = author.value;
+	let amount = Number(pages.value);
+	let study = read.checked;
+
+	dialog.close();
+	addBookToLibrary(label, creator, amount, study);
+	displayBooks();
+});
