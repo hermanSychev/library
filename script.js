@@ -1,12 +1,15 @@
 const myLibrary = [];
-function Book(title, author, pages, read) {
-	this.title = title;
-	this.author = author;
-	this.pages = pages;
-	this.read = read;
-	this.id = crypto.randomUUID();
+class Book {
+	constructor(title, author, pages, read, id) {
+		this.title = title;
+		this.author = author;
+		this.pages = pages;
+		this.read = read;
+		this.id = id;
+	}
+	id = crypto.randomUUID();
 
-	this.info = function () {
+	info() {
 		let wasRead;
 
 		if (this.read) {
@@ -15,13 +18,14 @@ function Book(title, author, pages, read) {
 			wasRead = "was not read yet";
 		}
 		return wasRead;
-	};
+	}
 }
 
-function addBookToLibrary(title, author, pages, read) {
-	const book = new Book(title, author, pages, read);
-	myLibrary.push(book);
-}
+function 
+	addBookToLibrary(title, author, pages, read) {
+		const book = new Book(title, author, pages, read);
+		myLibrary.push(book);
+	}
 
 function displayBooks() {
 	const holder = document.querySelector("#library");
@@ -45,8 +49,8 @@ function displayBooks() {
 		switchBtn.textContent = "toggle";
 		removeBtn.textContent = "remove";
 
-		switchBtn.addEventListener("click", ()=>{
-			book.toggleRead()
+		switchBtn.addEventListener("click", () => {
+			book.toggleRead();
 			card4.textContent = book.info();
 		});
 
